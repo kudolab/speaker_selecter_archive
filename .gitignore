@@ -315,3 +315,12 @@ Mkfile.old
 dkms.conf
 
 
+*.img
+*.png
+*.jpg
+*.jpeg
+*.JPEG
+*.JPG
+*.PNG
+*.wav
+*.WAV
