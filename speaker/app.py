@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import json
 
 import RPi.GPIO as GPIO
 from flask import Flask, request, jsonify
@@ -14,7 +15,7 @@ def health():
 
 @app.route("/speaker", methods=["GET"])
 def get_speaker_num():
-    with open('spaker.json', mode='rt', encoding='utf-8') as f:
+    with open('speaker.json', mode='rt', encoding='utf-8') as f:
         speaker_json = json.load(f)
         return jsonify(speaker_json)
 
@@ -47,7 +48,7 @@ def put_speaker_num():
     GPIO.output(onNo, 1)
 
     with open('speaker.json', mode='wt', encoding='utf-8') as f:
-        json.dump(data, f)
+        json.dump(request.json, f)
 
     # Success message
     msg = f"speaker_num changed to {speaker_num}"
