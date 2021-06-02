@@ -14,6 +14,7 @@ def put_speaker_num():
 		print(msg,file=sys.stderr)
 		return jsonify({"message":msg}), 400
 	# Speaker select
+	onNo = 2
 	print("##########################################")
 	print("Controlling now...")
 	print(f"Present speaker number ... {speaker_num}")
