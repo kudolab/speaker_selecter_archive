@@ -12,6 +12,11 @@ app = Flask(__name__)
 def health():
     return "ok"
 
+@app.route("/speaker", methods=["GET"])
+def get_speaker_num():
+    with open('spaker.json', mode='rt', encoding='utf-8') as f:
+        speaker_json = json.load(f)
+        return jsonify(speaker_json)
 
 @app.route("/speaker", methods=["PUT"])
 def put_speaker_num():
@@ -24,6 +29,7 @@ def put_speaker_num():
         msg = f"Error: request body is invalid"
         print(msg, file=sys.stderr)
         return jsonify({"message": msg}), 400
+
 
     speaker_num = request.json["speaker_num"]
     # Error process
@@ -39,6 +45,10 @@ def put_speaker_num():
         GPIO.output(i, 0)
     onNo = speaker_num + 1
     GPIO.output(onNo, 1)
+
+    with open('speaker.json', mode='wt', encoding='utf-8') as f:
+        json.dump(data, f)
+
     # Success message
     msg = f"speaker_num changed to {speaker_num}"
     print(msg, file=sys.stderr)
