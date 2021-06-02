@@ -10,14 +10,14 @@ app = Flask(__name__)
 def put_speaker_num():
     speaker_num = request.json["speaker_num"]
     # Error process
-    if speaker_num < 1 or speaker_num > 18:
-        msg = f"Error: speaker_num must be in 1-18, got: {speaker_num}"
+    if speaker_num < 1 or speaker_num > 19:
+        msg = f"Error: speaker_num must be in 1-19, got: {speaker_num}"
         print(msg, file=sys.stderr)
         return jsonify({"message": msg}), 400
     # Speaker select
     onNo = 2
     print(f"Present speaker number ... {speaker_num}")
-    for i in range(1, 19):
+    for i in range(1, 19+1):
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, 0)
     onNo = speaker_num + 1
@@ -28,4 +28,4 @@ def put_speaker_num():
     return jsonify({"message": msg})
 
 
-app.run(0.0.0.0)
+app.run(host="0.0.0.0",port=80)
