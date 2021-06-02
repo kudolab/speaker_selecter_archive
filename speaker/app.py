@@ -28,4 +28,4 @@ def put_speaker_num():
     return jsonify({"message": msg})
 
 
-app.run(host="0.0.0.0",port=80)
+app.run(host="0.0.0.0", port=80)
