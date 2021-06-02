@@ -1,6 +1,7 @@
 # speaker_selecter
 
 伝達関数測定装置のスピーカーセレクター。
+
 [TFMeasure](https://github.com/kudolab/TFMeasure)と連携して使います。
 
 ## 内容物
@@ -15,7 +16,9 @@
 ## 仕組み
 
 speaker-selecterはflask製のWebサーバーでリクエストを受け取り、GPIOを制御しています。
+
 また、systemdで動かすので電源を入れればすぐに動かすことができます。
+
 サーバーで受け付けているエンドポイントは以下の通りです。
 
 - GET http://172.24.176.169/health
