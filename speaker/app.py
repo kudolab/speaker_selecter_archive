@@ -15,6 +15,16 @@ def health():
 
 @app.route("/speaker", methods=["PUT"])
 def put_speaker_num():
+    if request.json is None:
+        msg = f"Error: request body is invalid"
+        print(msg, file=sys.stderr)
+        return jsonify({"message": msg}), 400
+
+    if not "speaker_num" in request.json:
+        msg = f"Error: request body is invalid"
+        print(msg, file=sys.stderr)
+        return jsonify({"message": msg}), 400
+
     speaker_num = request.json["speaker_num"]
     # Error process
     if speaker_num < 1 or speaker_num > 19:
