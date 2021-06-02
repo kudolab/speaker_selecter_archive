@@ -1,9 +1,15 @@
-from flask import Flask, request, jsonify
-import RPi.GPIO as GPIO
 import sys
+
+import RPi.GPIO as GPIO
+from flask import Flask, request, jsonify
 
 GPIO.setmode(GPIO.BCM)
 app = Flask(__name__)
+
+
+@app.route("/health", methods=["GET"])
+def health():
+    return "ok"
 
 
 @app.route("/speaker", methods=["PUT"])
@@ -16,8 +22,8 @@ def put_speaker_num():
         return jsonify({"message": msg}), 400
     # Speaker select
     onNo = 2
-    print(f"Present speaker number ... {speaker_num}")
-    for i in range(1, 19+1):
+    print(f"Present speaker number ... {speaker_num}", file=sys.stderr)
+    for i in range(1, 19 + 1):
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, 0)
     onNo = speaker_num + 1
